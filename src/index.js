@@ -49,14 +49,40 @@ const pizzaData = [
 function App() {
   return (
     <div>
-      <h1>Hello World</h1>
-      <Pizza />
+      <Header />
+      <Menu />
+      <Footer />
     </div>
   );
 }
 
+const Header = () => {
+  return <h1>Fast Pizza Company</h1>;
+};
+const Menu = () => {
+  return (
+    <div>
+      <h2>Our Menus</h2>
+      <Pizza />
+    </div>
+  );
+};
+const Footer = () => {
+  const hour = new Date().getHours();
+  const openingHour = 12;
+  const closingHour = 23;
+  const isOpen = hour >= openingHour && hour <= closingHour;
+  console.log(isOpen);
+  return <footer>{new Date().toLocaleTimeString()} We're now open!</footer>;
+};
 function Pizza() {
-  return <h2>pizza</h2>;
+  return (
+    <div>
+      <img src="pizzas/margherita.jpg" alt="margherita pizza" />
+      <h2>Pizza Margherita</h2>
+      <p>Tomato and mozarella</p>
+    </div>
+  );
 }
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
