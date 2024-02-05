@@ -70,43 +70,64 @@ const Menu = () => {
   return (
     <main className="menu">
       <h2>Our Menus</h2>
-      {pizzasNum > 0 && (
-        <ul className="pizzas">
-          {pizzas.map((pizza) => (
-            <Pizza pizzaObj={pizza} key={pizza.name} />
-          ))}
-        </ul>
+      {pizzasNum > 0 ? (
+        <>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor ipsa
+            est sequi asperiores ipsam recusandae.
+          </p>
+          <ul className="pizzas">
+            {pizzas.map((pizza) => (
+              <Pizza pizzaObj={pizza} key={pizza.name} />
+            ))}
+          </ul>
+        </>
+      ) : (
+        <p>We're still working on our menu. Please come back Later :)</p>
       )}
     </main>
   );
 };
-function Pizza(props) {
+function Pizza({ pizzaObj }) {
+  //   if (pizzaObj.soldOut) return null;
   return (
-    <li className="pizza">
-      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+    <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : ""}`}>
+      <img src={pizzaObj.photoName} alt={pizzaObj.name} />
       <div>
-        <h3>{props.pizzaObj.name}</h3>
-        <p>{props.pizzaObj.ingredients}</p>
-        <span>{props.pizzaObj.price}</span>
+        <h3>{pizzaObj.name}</h3>
+        <p>{pizzaObj.ingredients}</p>
+        <span>{pizzaObj.price ? "SOLD OUT" : pizzaObj.price}</span>
       </div>
     </li>
   );
 }
 const Footer = () => {
   const hour = new Date().getHours();
-  const openingHour = 1;
+  const openingHour = 9;
   const closingHour = 23;
   const isOpen = hour >= openingHour && hour <= closingHour;
   console.log(isOpen);
   return (
     <footer className="footer">
-      {isOpen && (
-        <div className="order">
-          <p>We're open open until {closingHour}:00</p>
-          <button className="btn">order</button>
-        </div>
+      {isOpen ? (
+        <Order openingHour={openingHour} closingHour={closingHour} />
+      ) : (
+        <p>
+          We're happy to welcome you from {openingHour}:00 to {closingHour}:00
+        </p>
       )}
     </footer>
+  );
+};
+
+const Order = ({ closingHour, openingHour }) => {
+  return (
+    <div className="order">
+      <p>
+        We're open from {openingHour} :00 to {closingHour}:00
+      </p>
+      <button className="btn">order</button>
+    </div>
   );
 };
 
