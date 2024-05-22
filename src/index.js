@@ -69,7 +69,7 @@ const Menu = () => {
   const pizzasNum = pizzas.length;
   return (
     <main className="menu">
-      <h2>Our Menus</h2>
+      <h2>lets make a change</h2>
       {pizzasNum > 0 ? (
         <>
           <p>
